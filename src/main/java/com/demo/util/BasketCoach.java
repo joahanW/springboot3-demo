@@ -1,4 +1,4 @@
-package com.demo.springboot3;
+package com.demo.util;
 
 import org.springframework.stereotype.Component;
 
