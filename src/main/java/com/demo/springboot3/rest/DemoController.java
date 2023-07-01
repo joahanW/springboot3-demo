@@ -9,17 +9,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
 
-    // Define private field for the dependency
-    private final Coach coach;
+    private Coach coach;
+    private Coach anotherCoach;
 
     @Autowired
-    public DemoController(@Qualifier("tennisCoach") Coach coach) {
-        System.out.println("In Constructor : " + getClass().getSimpleName());
+    public DemoController(
+            @Qualifier("tennisCoach") Coach coach,
+            @Qualifier("tennisCoach") Coach anotherCoach) {
         this.coach = coach;
+        this.anotherCoach = anotherCoach;
     }
 
     @GetMapping("/dailyworkout")
     public String getDailyWorkout() {
         return coach.getDailyWorkout();
+    }
+
+    @GetMapping("/check")
+    public String check(){
+        return "Comparing beans : coach == anotherCoach, " + (coach == anotherCoach);
     }
 }
